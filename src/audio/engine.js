@@ -12,6 +12,16 @@ export const SOUND_MODES = [
 // are used when a held string needs to glide while it is resized.
 export const GLIDE_MODES = new Set(['triangle', 'sawtooth', 'square'])
 
+// EQ3 gains are decibels; the crossover points use the *Frequency options.
+// Using frequencies for `low`/`high` would jam the signal into the compressor.
+export const BODY_EQ = {
+  low: 2.5,
+  mid: -1,
+  high: -2,
+  lowFrequency: 140,
+  highFrequency: 4000,
+}
+
 const DEFAULT_STATE = {
   unlocked: false,
   mode: 'pluck',
@@ -52,14 +62,7 @@ export function createAudioEngine({
     // A little body and a rolled-off top make PluckSynth read as a wooden
     // string instead of a bright synth pluck. The compressor keeps a fast
     // strum from clipping without flattening single notes.
-    const body = new Tone.EQ3({
-      low: 140,
-      lowValue: 2.5,
-      mid: 900,
-      midValue: -1,
-      high: 4000,
-      highValue: -2,
-    })
+    const body = new Tone.EQ3({ ...BODY_EQ })
     const warmth = new Tone.Filter({
       type: 'lowpass',
       frequency: 6200,

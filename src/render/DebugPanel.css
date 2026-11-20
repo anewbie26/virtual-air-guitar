@@ -1,0 +1,41 @@
+.debug {
+  position: absolute;
+  top: calc(52px + env(safe-area-inset-top));
+  left: calc(10px + env(safe-area-inset-left));
+  z-index: 10;
+  min-width: 190px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  background: rgba(5, 7, 10, 0.78);
+  color: #cfe0ea;
+  font: 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+}
+
+.debug__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.debug__row span {
+  color: #7d8b96;
+}
+
+.debug__row b {
+  font-weight: 600;
+}
+
+.debug__hand {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #9dffc4;
+}
+
+.debug__hint {
+  margin-top: 6px;
+  color: #55636e;
+}

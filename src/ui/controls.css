@@ -1,0 +1,208 @@
+.instrument-bar {
+  position: absolute;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  left: 50%;
+  z-index: 8;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  width: max-content;
+  max-width: calc(100% - 20px);
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(6, 10, 14, 0.74);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  transform: translateX(-50%);
+  backdrop-filter: blur(12px);
+}
+
+.instrument-bar__control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.instrument-bar__control b {
+  min-width: 2.4em;
+  color: var(--fg);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.instrument-bar__control input[type='range'] {
+  width: 84px;
+  height: 18px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.instrument-bar__control select {
+  height: 26px;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 7px;
+  background: rgba(16, 22, 28, 0.9);
+  color: var(--fg);
+  font-size: 0.72rem;
+}
+
+.instrument-bar__error {
+  flex-basis: 100%;
+  color: #ffb3b3;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.sound-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sound-button__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff9a5c;
+  box-shadow: 0 0 8px rgba(255, 154, 92, 0.9);
+}
+
+.sound-button--on {
+  color: var(--accent);
+  border-color: rgba(125, 255, 179, 0.35);
+}
+
+.sound-button--on .sound-button__dot {
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(125, 255, 179, 0.9);
+}
+
+.calibration {
+  position: absolute;
+  right: calc(12px + env(safe-area-inset-right));
+  bottom: calc(78px + env(safe-area-inset-bottom));
+  z-index: 9;
+  width: min(320px, calc(100% - 24px));
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(8, 13, 18, 0.9);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  color: var(--fg);
+  font-size: 0.76rem;
+  backdrop-filter: blur(14px);
+}
+
+.calibration__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.calibration__header h2 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.calibration__live {
+  margin: 8px 0;
+  color: var(--muted);
+}
+
+.calibration__live b {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.calibration__steps {
+  margin: 0 0 10px;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.calibration__steps b {
+  margin-left: 6px;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.calibration__manual {
+  display: grid;
+  gap: 6px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.calibration__manual label {
+  display: grid;
+  grid-template-columns: 42px 1fr 34px;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.calibration__manual input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.calibration__manual b {
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.calibration__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.calibration__message {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 820px), (max-height: 560px) {
+  .instrument-bar {
+    gap: 6px 9px;
+    padding: 6px 8px;
+  }
+
+  .instrument-bar .ui-button {
+    min-height: 40px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
+  .instrument-bar__control span {
+    display: none;
+  }
+
+  .instrument-bar__control input[type='range'] {
+    width: 64px;
+    height: 30px;
+  }
+
+  .instrument-bar__control select {
+    height: 36px;
+    font-size: 0.78rem;
+  }
+
+  .calibration__manual input[type='range'] {
+    height: 30px;
+  }
+}

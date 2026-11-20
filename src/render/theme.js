@@ -45,18 +45,23 @@ export const STRING_PALETTE = [
 ]
 
 export const STRING_STYLE = {
-  baseAlpha: 0.42,
-  coreWidth: 1.5,
-  guideOffset: 4,
-  guideAlpha: 0.15,
-  tickStep: 18,
-  tickHalf: 2.6,
-  tickHalfTall: 4.8,
-  tickAlpha: 0.32,
-  capHalf: 5,
-  capAlpha: 0.55,
-  circleRadius: 4.5,
-  circleWidth: 1.4,
+  baseAlpha: 0.68,
+  coreWidth: 3,
+  coreGlowWidth: 7,
+  coreGlowAlpha: 0.18,
+  guideOffset: 5,
+  guideAlpha: 0.3,
+  guideWidth: 1.4,
+  tickStep: 20,
+  tickHalf: 3.4,
+  tickHalfTall: 5.8,
+  tickAlpha: 0.5,
+  tickWidth: 1.4,
+  capHalf: 6,
+  capAlpha: 0.75,
+  capWidth: 2,
+  circleRadius: 5.8,
+  circleWidth: 2,
 }
 
 export const HAND_STYLE = {

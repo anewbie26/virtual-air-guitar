@@ -48,16 +48,39 @@ export function createAudioEngine({
   function ensureGraph() {
     if (graph) return graph
     const input = new Tone.Gain(1)
+
+    // A little body and a rolled-off top make PluckSynth read as a wooden
+    // string instead of a bright synth pluck. The compressor keeps a fast
+    // strum from clipping without flattening single notes.
+    const body = new Tone.EQ3({
+      low: 140,
+      lowValue: 2.5,
+      mid: 900,
+      midValue: -1,
+      high: 4000,
+      highValue: -2,
+    })
+    const warmth = new Tone.Filter({
+      type: 'lowpass',
+      frequency: 6200,
+      Q: 0.6,
+    })
     const reverb = new Tone.Reverb({
-      decay: 2.4,
-      preDelay: 0.012,
-      wet: 0.22,
+      decay: 1.9,
+      preDelay: 0.01,
+      wet: 0.16,
+    })
+    const compressor = new Tone.Compressor({
+      threshold: -18,
+      ratio: 2.5,
+      attack: 0.01,
+      release: 0.2,
     })
     const master = new Tone.Gain(state.volume)
-    input.connect(reverb)
-    reverb.connect(master)
+
+    input.chain(body, warmth, reverb, compressor, master)
     master.toDestination()
-    graph = { input, reverb, master }
+    graph = { input, body, warmth, reverb, compressor, master }
     return graph
   }
 
@@ -169,7 +192,10 @@ export function createAudioEngine({
     if (graph) {
       try {
         graph.input.dispose()
+        graph.body.dispose()
+        graph.warmth.dispose()
         graph.reverb.dispose()
+        graph.compressor.dispose()
         graph.master.dispose()
       } catch {
         // The Tone context may already be closed.

@@ -114,14 +114,27 @@ export function createRenderer(canvas) {
     // Faint parallel "ruler edge".
     ctx.globalAlpha = STRING_STYLE.guideAlpha
     ctx.strokeStyle = tint.core
-    ctx.lineWidth = 1
+    ctx.lineWidth = STRING_STYLE.guideWidth
     ctx.beginPath()
     ctx.moveTo(a.x + normal.x * STRING_STYLE.guideOffset, a.y + normal.y * STRING_STYLE.guideOffset)
     ctx.lineTo(b.x + normal.x * STRING_STYLE.guideOffset, b.y + normal.y * STRING_STYLE.guideOffset)
     ctx.stroke()
 
+    // Soft halo keeps the thin string visible over a busy camera feed.
+    ctx.globalAlpha = STRING_STYLE.coreGlowAlpha
+    ctx.strokeStyle = tint.glow
+    ctx.lineWidth = STRING_STYLE.coreGlowWidth
+    ctx.shadowBlur = 12
+    ctx.shadowColor = tint.glow
+    ctx.beginPath()
+    ctx.moveTo(a.x, a.y)
+    ctx.lineTo(b.x, b.y)
+    ctx.stroke()
+    ctx.shadowBlur = 0
+
     // Main thread.
     ctx.globalAlpha = STRING_STYLE.baseAlpha
+    ctx.strokeStyle = tint.core
     ctx.lineWidth = STRING_STYLE.coreWidth
     ctx.beginPath()
     ctx.moveTo(a.x, a.y)
@@ -130,7 +143,7 @@ export function createRenderer(canvas) {
 
     // Tick marks, every fifth one taller.
     ctx.globalAlpha = STRING_STYLE.tickAlpha
-    ctx.lineWidth = 1
+    ctx.lineWidth = STRING_STYLE.tickWidth
     ctx.beginPath()
     let index = 0
     for (
@@ -153,6 +166,7 @@ export function createRenderer(canvas) {
 
     // End caps and endpoint circles.
     ctx.globalAlpha = STRING_STYLE.capAlpha
+    ctx.lineWidth = STRING_STYLE.capWidth
     ctx.beginPath()
     for (const end of [a, b]) {
       ctx.moveTo(
@@ -225,19 +239,28 @@ export function createRenderer(canvas) {
 
     // Wide soft glow.
     tracePolyline(ctx, points)
-    ctx.globalAlpha = 0.35
+    ctx.globalAlpha = 0.45
     ctx.strokeStyle = tint.glow
-    ctx.lineWidth = 9
-    ctx.shadowBlur = 18
+    ctx.lineWidth = 13
+    ctx.shadowBlur = 24
+    ctx.shadowColor = tint.glow
+    ctx.stroke()
+
+    // Coloured body of the vibrating string.
+    tracePolyline(ctx, points)
+    ctx.globalAlpha = 0.6
+    ctx.strokeStyle = tint.core
+    ctx.lineWidth = 6
+    ctx.shadowBlur = 14
     ctx.shadowColor = tint.glow
     ctx.stroke()
 
     // Bright core.
     tracePolyline(ctx, points)
-    ctx.globalAlpha = 0.95
+    ctx.globalAlpha = 0.98
     ctx.strokeStyle = '#fffef0'
-    ctx.lineWidth = 2.2
-    ctx.shadowBlur = 10
+    ctx.lineWidth = 3.4
+    ctx.shadowBlur = 12
     ctx.shadowColor = tint.glow
     ctx.stroke()
 

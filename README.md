@@ -64,8 +64,10 @@ Gestures:
 - `src/gestures/` — pinch hysteresis, string model, geometry and pluck
   detection.
 - `src/render/` — canvas overlay, pooled sparks and theme.
-- `src/audio/` — Tone.js voice pool (16 reusable voices), reverb and master
-  volume. Engine API is `pluck(frequency, velocity, offsetSeconds, stringId)`.
+- `src/audio/` — Tone.js voice pool (16 reusable voices), pitch/velocity-based
+  pluck tone shaping, warm EQ/low-pass, light reverb, a gentle strum compressor
+  and master volume. Engine API is
+  `pluck(frequency, velocity, offsetSeconds, stringId)`.
 - `src/sim/` — mouse/touch input producing MediaPipe-shaped results.
 - `src/settings.js` — sanitized settings persisted to localStorage.
 
